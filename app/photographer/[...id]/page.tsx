@@ -1,7 +1,8 @@
 // Types
 import Select from "@/app/components/Select/Select";
-import { Photographer } from "@/app/types";
+import { Media, Photographer } from "@/app/types";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default async function PhotographerPage({
   params,
@@ -10,7 +11,16 @@ export default async function PhotographerPage({
 }) {
   const { id } = await params;
 
+  // TODO : Gérer l'erreur 404
   // TODO : Utiliser la requête Prisma de prisma-db pour récupérer les données du photographe à partir de son ID
+  // TODO : Utiliser la requête Prisma de prisma-db pour récupérer les données des médias du photographe à partir de son ID
+
+  const [filteredMedias, setFilteredMedias] = useState<Media[]>([]); // TODO : Filtrer les médias du photographe à partir de son ID
+
+  useEffect(() => {
+    // TODO : Trier les médias du photographe en fonction du critère de tri sélectionné (popularité, date, titre)
+    setFilteredMedias([]); // TODO : Mettre à jour les médias filtrés en fonction du critère de tri sélectionné
+  }, []);
 
   const photographer: Photographer = {
     id: 1,
@@ -47,6 +57,20 @@ export default async function PhotographerPage({
       {/* Galerie du photographe */}
       <div>
         <Select items={["Popularité", "Date", "Titre"]} />
+        {/* TODO : Afficher sa gallerie photo */}
+        {filteredMedias.map((media) => (
+          <div key={media.id}>
+            <Image
+              src={`/${media.image}`}
+              alt={media.title}
+              width={300}
+              height={200}
+              className="rounded-sm object-cover"
+            />
+            <h2 className="text-lg font-bold mt-2">{media.title}</h2>
+            <p className="text-sm text-gray-dark">{media.likes} likes</p>
+          </div>
+        ))}
       </div>
     </div>
   );
