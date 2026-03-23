@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #901c1c;
+  --color-secondary: #d3573c;
+  --color-gray-dark: #525252;
+  --color-gray-light: #fafafa;
+  --text-xxl: 64px;
+  --text-xl: 36px;
+  --text-lg: 24px;
+  --text-normal: 18px;
+  --text-s: 13px;
+  --text-xs: 10px;
+  --text-xxs: 9px;
+  --max-width: 1240px;
+}
+
+/* Global Styles */
+body {
+  margin: 0 auto;
+  padding: 0;
+  max-width: var(--max-width);
+}
+
+@layer components {
+  .btn {
+    @apply bg-primary text-white py-4 px-6 rounded-lg font-bold text-normal cursor-pointer transition-all duration-300 ease-in-out hover:bg-secondary hover:text-black;
+  }
+}
+
+@layer base {
+  select::picker-icon {
+    content: "\2665";
+    color: white;
+  }
+
+  select::picker(select) {
+    appearance: base-select;
+    padding: 0.5rem;
+    border: 2px solid #8ec89a;
+    border-radius: 10px;
+    background-color: white;
+    color: #8ec89a;
+  }
+}
