@@ -12,9 +12,11 @@ export interface Media {
   id: number;
   photographerId: number;
   title: string;
-  image?: string;
-  video?: string;
+  image?: string | null;
+  video?: string | null;
   likes: number;
   date: string;
   price: number;
 }
+
+export type SelectItems = "Popularité" | "Date" | "Titre";

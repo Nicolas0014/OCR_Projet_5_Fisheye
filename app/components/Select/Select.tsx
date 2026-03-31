@@ -6,17 +6,22 @@ import { useState } from "react";
 import Image from "next/image";
 
 // Types
-type SelectItems = "Popularité" | "Date" | "Titre";
+import { SelectItems } from "@/app/types";
 
-export default function Select({ items }: { items: string[] }) {
-  const [selected, setSelected] = useState<SelectItems>(
-    items[0] as SelectItems,
-  );
-
+export default function Select({
+  items,
+  filterSelected,
+  setFilterSelected,
+}: {
+  items: string[];
+  filterSelected: SelectItems;
+  setFilterSelected: (item: SelectItems) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (item: SelectItems) => {
-    setSelected(item);
+    setFilterSelected(item);
+    setIsOpen(false);
   };
 
   return (
@@ -26,11 +31,11 @@ export default function Select({ items }: { items: string[] }) {
       </label>
       <div
         id="orderBy"
-        className={`relative bg-primary text-white font-bold rounded-md py-2.5 px-4 cursor-pointer`}
+        className={`relative bg-primary text-white font-bold rounded-md py-1 px-4 cursor-pointer min-w-40 z-10`}
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-4">
-          <span className="py-2.5 px-1">{selected}</span>
+          <span className="py-3 px-1">{filterSelected}</span>
           <Image
             src="/ChevronUp.png"
             alt="Chevron Up"
@@ -40,14 +45,14 @@ export default function Select({ items }: { items: string[] }) {
           />
         </div>
         {isOpen && (
-          <div className="relative bg-primary w-full flex flex-col">
+          <div className="absolute left-0 pb-1 px-4 bg-primary w-full flex flex-col rounded-b-md">
             {items
-              .filter((item) => item !== selected)
+              .filter((item) => item !== filterSelected)
               .map((item) => (
                 <div
                   key={item}
                   onClick={() => handleChange(item as SelectItems)}
-                  className="py-2.5 px-1 border-t border-white"
+                  className="py-3 px-1 border-t border-white"
                 >
                   <span>{item}</span>
                 </div>

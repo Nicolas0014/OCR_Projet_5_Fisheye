@@ -59,31 +59,31 @@ Puis
 Toujours dans le dossier prisma, créez un nouveau fichier `seed.js` et coller le code suivant à l’intérieur:
 
 ```js
-import { PrismaClient } from '../generated/prisma/client.ts';
-import photographers from '../data/photographer.json' with { type: 'json' };
-import medias from '../data/media.json' with { type: 'json' };
+import { PrismaClient } from "../generated/prisma/client.ts";
+import photographers from "../data/photographer.json" with { type: "json" };
+import medias from "../data/media.json" with { type: "json" };
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
-    await prisma.photographer.createMany({
-        data: photographers
-    });
+  await prisma.photographer.createMany({
+    data: photographers,
+  });
 
-    await prisma.media.createMany({
-        data: medias // content from ./data/media.json
-    });
+  await prisma.media.createMany({
+    data: medias, // content from ./data/media.json
+  });
 }
 
 main()
-    .then(async () => {
-        await prisma.$disconnect()
-    })
-    .catch(async (e) => {
-        console.error(e)
-        await prisma.$disconnect()
-        process.exit(1)
-    })
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
 ```
 
 Enfin, ajoutez la nouvelle configuration de prisma dans votre `package.json` :
@@ -105,7 +105,7 @@ Vous pouvez consulter vos données en utilisant la fonctionnalité studio de pri
 Dans le dossier `app` de votre projet, créez un nouveau dossier lib puis un fichier à l’intérieur de ce dernier `prisma-db.js`. Dans ce fichier, insérez le code suivant:
 
 ```js
-const { PrismaClient } = require('../generated/prisma/client');
+const { PrismaClient } = require("../generated/prisma/client");
 
 const prisma = new PrismaClient();
 

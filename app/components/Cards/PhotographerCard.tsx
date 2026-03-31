@@ -19,7 +19,7 @@ export default function PhotographerCard({
           className="flex flex-col items-center"
         >
           <Image
-            src={photographer.portrait}
+            src={"/" + photographer.portrait}
             alt={`${photographer.name}'s profile`}
             width={200}
             height={200}
