@@ -33,6 +33,12 @@ export default function Select({
         id="orderBy"
         className={`relative bg-primary text-white font-bold rounded-md py-1 px-4 cursor-pointer min-w-40 z-10`}
         onClick={() => setIsOpen(!isOpen)}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            setIsOpen(!isOpen);
+          }
+        }}
       >
         <div className="flex items-center gap-4">
           <span className="py-3 px-1">{filterSelected}</span>
@@ -52,6 +58,12 @@ export default function Select({
                 <div
                   key={item}
                   onClick={() => handleChange(item as SelectItems)}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleChange(item as SelectItems);
+                    }
+                  }}
                   className="py-3 px-1 border-t border-white"
                 >
                   <span>{item}</span>

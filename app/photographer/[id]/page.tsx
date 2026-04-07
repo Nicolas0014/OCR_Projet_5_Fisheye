@@ -3,10 +3,9 @@ import {
   getAllMediasForPhotographer,
 } from "@/app/lib/prisma-db";
 
-// Types
-
 // Components
-import Image from "next/image";
+import Header from "@/app/components/Header/Header";
+import PhotographerHeader from "@/app/components/PhotographerHeader/PhotographerHeader";
 import Medias from "@/app/components/Medias/Medias";
 
 // Hooks
@@ -14,6 +13,10 @@ import { Suspense } from "react";
 
 // Navigation
 import { notFound } from "next/navigation";
+
+// Types
+import { Photographer, Media } from "@/app/types";
+import PhotographerStats from "@/app/components/PhotographerStats/PhotographerStats";
 
 export default async function PhotographerPage({
   params,
@@ -28,47 +31,36 @@ export default async function PhotographerPage({
     notFound();
   }
 
-  const photographer = await getPhotographer(numericId);
+  const photographer: Photographer | null = await getPhotographer(numericId);
 
   if (!photographer) {
     notFound();
   }
 
-  const medias = await getAllMediasForPhotographer(photographer.id);
+  const medias: Media[] = await getAllMediasForPhotographer(photographer.id);
 
   return (
-    <div className="space-y-8">
-      {/* Header du photographe */}
-      <Suspense
-        fallback={
-          <div>Chargement des informations du photographe en cours...</div>
-        }
-      >
-        <div className="bg-gray-light py-16 px-12 rounded-sm flex items-center justify-between">
-          <div className="space-y-4">
-            <h1 className="text-xxl font-bold text-secondary mb-0">
-              {photographer.name}
-            </h1>
-            <p className="text-lg text-primary">
-              {photographer.city}, {photographer.country}
-            </p>
-            <p className="text-normal text-gray-dark">{photographer.tagline}</p>
-          </div>
-          <button className="btn">Contactez-moi</button>
-          <Image
-            src={`/${photographer.portrait}`}
-            alt={photographer.name}
-            width={200}
-            height={200}
-            className="rounded-full w-50 h-50 object-cover"
-          />
-        </div>
-      </Suspense>
+    <main>
+      <Header showTitle={false} />
 
-      {/* Galerie du photographe */}
-      <Suspense fallback={<div>Chargement des médias en cours...</div>}>
-        <Medias medias={medias} />
-      </Suspense>
-    </div>
+      <div className="space-y-8">
+        {/* Header du photographe */}
+        <Suspense
+          fallback={
+            <div>Chargement des informations du photographe en cours...</div>
+          }
+        >
+          <PhotographerHeader photographer={photographer} />
+        </Suspense>
+
+        {/* Galerie du photographe */}
+        <Suspense fallback={<div>Chargement des médias en cours...</div>}>
+          <Medias photographer={photographer} medias={medias} />
+        </Suspense>
+      </div>
+
+      {/* Données fixes en bas de page */}
+      <PhotographerStats photographer={photographer} medias={medias} />
+    </main>
   );
 }

@@ -26,6 +26,10 @@ body {
   .btn {
     @apply bg-primary text-white py-4 px-6 rounded-lg font-bold text-normal cursor-pointer transition-all duration-300 ease-in-out hover:bg-secondary hover:text-black;
   }
+
+  .inputStyle {
+    @apply w-full bg-white rounded-sm px-3 py-4 focus:outline-none focus:ring-3 focus:ring-primary;
+  }
 }
 
 @layer base {

@@ -20,3 +20,11 @@ export interface Media {
 }
 
 export type SelectItems = "Popularité" | "Date" | "Titre";
+
+export interface FormInput {
+  label: string;
+  type: string;
+  id: string;
+  value: string;
+  setFunction: React.Dispatch<React.SetStateAction<string>>;
+}

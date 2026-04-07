@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// Components
-import Header from "./components/Header/Header";
-
 export const metadata: Metadata = {
   title: "Fisheye",
   description:
@@ -17,10 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>
-        <Header showTitle={true} />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

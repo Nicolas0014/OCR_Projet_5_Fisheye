@@ -2,6 +2,7 @@ import { getAllPhotographers } from "@/app/lib/prisma-db";
 
 // Components
 import PhotographerCard from "./components/Cards/PhotographerCard";
+import Header from "./components/Header/Header";
 
 // Types
 import { Photographer } from "./types";
@@ -9,9 +10,10 @@ import { Suspense } from "react";
 
 export default async function Home() {
   const allPhotographers: Photographer[] = await getAllPhotographers();
-  // TODO : utiliser le contexte pour cacher ?
+
   return (
     <main>
+      <Header showTitle={true} />
       <Suspense fallback={<div>Loading...</div>}>
         <div className="grid grid-cols-3 gap-y-20">
           {allPhotographers.map((photographer: Photographer, index: number) => (
