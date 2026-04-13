@@ -42,7 +42,7 @@ export default function ModaleInterface({
         onClick={onClose}
       ></div>
       <div
-        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-310 h-10/12 bg-white rounded-md p-8"
+        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-310 h-11/12 bg-white rounded-md p-8"
         aria-label="image closeup view"
       >
         <svg

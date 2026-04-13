@@ -13,13 +13,7 @@ import { useState, useEffect } from "react";
 // Utils
 import { sortMedias } from "@/app/utils/sortMedias";
 
-export default function Medias({
-  photographer,
-  medias,
-}: {
-  photographer: Photographer;
-  medias: Media[];
-}) {
+export default function Medias({ medias }: { medias: Media[] }) {
   const [filterSelected, setFilterSelected] =
     useState<SelectItems>("Popularité");
 
@@ -42,7 +36,6 @@ export default function Medias({
           filteredMedias.map((media) => (
             <MediasModaleTrigger
               key={media.id}
-              photographer={photographer}
               media={media}
               allMedias={filteredMedias}
             />

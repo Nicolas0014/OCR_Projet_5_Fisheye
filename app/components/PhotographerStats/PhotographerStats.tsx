@@ -2,7 +2,10 @@
 
 // Types
 import { Photographer, Media } from "@/app/types";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
+// Context
+import { useLikes } from "@/app/contexts/totalLikes";
 
 export default function PhotographerStats({
   photographer,
@@ -11,11 +14,12 @@ export default function PhotographerStats({
   photographer: Photographer;
   medias: Media[];
 }) {
-  const [totalLikes, setTotalLikes] = useState(0);
+  const { totalLikes, setInitialLikes } = useLikes();
 
   useEffect(() => {
-    const likesSum = medias.reduce((sum, media) => sum + media.likes, 0);
-    setTotalLikes(likesSum);
+    const initialLikes = medias.reduce((sum, media) => sum + media.likes, 0);
+    console.log("Initial total likes:", initialLikes);
+    setInitialLikes(initialLikes);
   }, [medias]);
 
   return (

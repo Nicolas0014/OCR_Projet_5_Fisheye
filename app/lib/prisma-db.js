@@ -21,3 +21,9 @@ export const updateNumberOfLikes = (mediaId, newNumberOfLikes) =>
     where: { id: mediaId },
     data: { likes: newNumberOfLikes },
   });
+
+export const secureUpdateNumberOfLikes = (mediaId, unlike = false) =>
+  prisma.media.update({
+    where: { id: mediaId },
+    data: { likes: { increment: unlike ? -1 : 1 } },
+  });

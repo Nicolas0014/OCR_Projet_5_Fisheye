@@ -1,3 +1,6 @@
+// Providers
+import { LikesProvider } from "@/app/contexts/totalLikes";
+
 import {
   getPhotographer,
   getAllMediasForPhotographer,
@@ -40,27 +43,29 @@ export default async function PhotographerPage({
   const medias: Media[] = await getAllMediasForPhotographer(photographer.id);
 
   return (
-    <main>
-      <Header showTitle={false} />
+    <LikesProvider>
+      <main>
+        <Header showTitle={false} />
 
-      <div className="space-y-8">
-        {/* Header du photographe */}
-        <Suspense
-          fallback={
-            <div>Chargement des informations du photographe en cours...</div>
-          }
-        >
-          <PhotographerHeader photographer={photographer} />
-        </Suspense>
+        <div className="space-y-8">
+          {/* Header du photographe */}
+          <Suspense
+            fallback={
+              <div>Chargement des informations du photographe en cours...</div>
+            }
+          >
+            <PhotographerHeader photographer={photographer} />
+          </Suspense>
 
-        {/* Galerie du photographe */}
-        <Suspense fallback={<div>Chargement des médias en cours...</div>}>
-          <Medias photographer={photographer} medias={medias} />
-        </Suspense>
-      </div>
+          {/* Galerie du photographe */}
+          <Suspense fallback={<div>Chargement des médias en cours...</div>}>
+            <Medias medias={medias} />
+          </Suspense>
+        </div>
 
-      {/* Données fixes en bas de page */}
-      <PhotographerStats photographer={photographer} medias={medias} />
-    </main>
+        {/* Données fixes en bas de page */}
+        <PhotographerStats photographer={photographer} medias={medias} />
+      </main>
+    </LikesProvider>
   );
 }

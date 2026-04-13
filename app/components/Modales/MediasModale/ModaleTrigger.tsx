@@ -11,11 +11,9 @@ import Image from "next/image";
 import { Media, Photographer } from "@/app/types";
 
 export default function ModaleTrigger({
-  photographer,
   media,
   allMedias,
 }: {
-  photographer: Photographer;
   media: Media;
   allMedias: Media[];
 }) {
@@ -50,7 +48,7 @@ export default function ModaleTrigger({
         ) : null}
         <div className="text-primary text-lg flex items-center justify-between py-2">
           <h2>{media.title}</h2>
-          <LikeIcon photographer={photographer} media={media} />
+          <LikeIcon media={media} />
         </div>
       </article>
 

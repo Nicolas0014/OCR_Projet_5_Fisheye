@@ -1,16 +1,10 @@
 "use server";
 
-import { updateNumberOfLikes } from "@/app/lib/prisma-db";
-import { revalidatePath } from "next/cache";
+import { secureUpdateNumberOfLikes } from "@/app/lib/prisma-db";
 
-export async function updateLike(
-  mediaId: number,
-  newNumberOfLikes: number,
-  photographerId: number,
-) {
+export async function updateLike(mediaId: number, unlike: boolean = false) {
   try {
-    const result = await updateNumberOfLikes(mediaId, newNumberOfLikes);
-    revalidatePath(`/photographer/${photographerId}`);
+    const result = await secureUpdateNumberOfLikes(mediaId, unlike);
     return {
       success: true,
       data: result,

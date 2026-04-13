@@ -1,22 +1,16 @@
 "use client";
 // Types
-import { Media, Photographer } from "@/app/types";
+import { Media } from "@/app/types";
 import { useState } from "react";
 
 // Server Actions
 import { updateLike } from "@/app/actions/updateLike";
 
-// Navigation
-import { useRouter } from "next/navigation";
+// Context
+import { useLikes } from "@/app/contexts/totalLikes";
 
-export default function LikeIcon({
-  photographer,
-  media,
-}: {
-  photographer: Photographer;
-  media: Media;
-}) {
-  const router = useRouter();
+export default function LikeIcon({ media }: { media: Media }) {
+  const { incrementLikes, decrementLikes } = useLikes();
   const [numberOfLikes, setNumberOfLikes] = useState(media.likes);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -24,18 +18,14 @@ export default function LikeIcon({
     e.stopPropagation();
 
     try {
-      const response = await updateLike(
-        media.id,
-        numberOfLikes + 1,
-        photographer.id,
-      );
+      const response = await updateLike(media.id);
 
-      if (!response.success) {
-        throw new Error("Failed to update like");
-      } else {
+      if (response.success) {
         setNumberOfLikes((prev) => prev + 1);
         setIsLiked(true);
-        router.refresh();
+        incrementLikes();
+      } else {
+        throw new Error("Failed to update like");
       }
     } catch (error) {
       console.error("Error updating like:", error);
@@ -46,18 +36,14 @@ export default function LikeIcon({
     e.stopPropagation();
 
     try {
-      const response = await updateLike(
-        media.id,
-        numberOfLikes - 1,
-        photographer.id,
-      );
+      const response = await updateLike(media.id, true);
 
       if (!response.success) {
         throw new Error("Failed to update like");
       } else {
         setNumberOfLikes((prev) => prev - 1);
         setIsLiked(false);
-        router.refresh();
+        decrementLikes();
       }
     } catch (error) {
       console.error("Error updating like:", error);
