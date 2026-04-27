@@ -8,7 +8,7 @@ import LikeIcon from "../../LikeIcon/LikeIcon";
 import Image from "next/image";
 
 // Types
-import { Media, Photographer } from "@/app/types";
+import { Media } from "@/app/types";
 
 export default function ModaleTrigger({
   media,

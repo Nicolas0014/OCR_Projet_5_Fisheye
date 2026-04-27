@@ -14,7 +14,7 @@ export default function LikeIcon({ media }: { media: Media }) {
   const [numberOfLikes, setNumberOfLikes] = useState(media.likes);
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleLike = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleLike = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     try {
@@ -32,7 +32,7 @@ export default function LikeIcon({ media }: { media: Media }) {
     }
   };
 
-  const handleUnlike = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleUnlike = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     try {
@@ -53,26 +53,25 @@ export default function LikeIcon({ media }: { media: Media }) {
   return (
     <p className="flex items-center gap-1.5">
       {numberOfLikes}
-      <svg
-        width="18"
-        height="19"
-        viewBox="0 0 18 19"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="likes"
+      <button
         onClick={(e) => (isLiked ? handleUnlike(e) : handleLike(e))}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            isLiked ? handleUnlike(e as any) : handleLike(e as any);
-          }
-        }}
+        onKeyDown={(e) => e.stopPropagation()}
+        aria-label={isLiked ? "Retirer un like" : "Ajouter un like"}
       >
-        <path
-          d="M8.75 18.35L7.48125 17.03C2.975 12.36 0 9.28 0 5.5C0 2.42 2.1175 0 4.8125 0C6.335 0 7.79625 0.81 8.75 2.09C9.70375 0.81 11.165 0 12.6875 0C15.3825 0 17.5 2.42 17.5 5.5C17.5 9.28 14.525 12.36 10.0188 17.04L8.75 18.35Z"
-          fill={isLiked ? "#911C1C" : "#CCCCCC"}
-        />
-      </svg>
+        <svg
+          width="18"
+          height="19"
+          viewBox="0 0 18 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="likes"
+        >
+          <path
+            d="M8.75 18.35L7.48125 17.03C2.975 12.36 0 9.28 0 5.5C0 2.42 2.1175 0 4.8125 0C6.335 0 7.79625 0.81 8.75 2.09C9.70375 0.81 11.165 0 12.6875 0C15.3825 0 17.5 2.42 17.5 5.5C17.5 9.28 14.525 12.36 10.0188 17.04L8.75 18.35Z"
+            fill={isLiked ? "#911C1C" : "#CCCCCC"}
+          />
+        </svg>
+      </button>
     </p>
   );
 }

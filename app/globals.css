@@ -5,9 +5,9 @@
   --color-secondary: #d3573c;
   --color-gray-dark: #525252;
   --color-gray-light: #fafafa;
-  --text-xxl: 64px;
-  --text-xl: 36px;
-  --text-lg: 24px;
+  --text-xxl: clamp(40px, 3vw, 56px);
+  --text-xl: clamp(28px, 2.5vw, 30px);
+  --text-lg: clamp(18px, 1.8vw, 22px);
   --text-normal: 18px;
   --text-s: 13px;
   --text-xs: 10px;
@@ -22,13 +22,17 @@ body {
   max-width: var(--max-width);
 }
 
+img {
+  overflow-clip-margin: unset;
+}
+
 @layer components {
   .btn {
     @apply bg-primary text-white py-4 px-6 rounded-lg font-bold text-normal cursor-pointer transition-all duration-300 ease-in-out hover:bg-secondary hover:text-black;
   }
 
   .inputStyle {
-    @apply w-full bg-white rounded-sm px-3 py-4 focus:outline-none focus:ring-3 focus:ring-primary;
+    @apply w-full bg-white rounded-sm px-6 py-4 focus:outline-none focus:ring-3 focus:ring-primary text-lg;
   }
 }
 
@@ -45,5 +49,32 @@ body {
     border-radius: 10px;
     background-color: white;
     color: #8ec89a;
+  }
+}
+@layer components {
+  .skeleton-shimmer {
+    @apply bg-gray-200;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }

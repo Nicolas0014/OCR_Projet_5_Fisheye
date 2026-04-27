@@ -8,23 +8,22 @@ import { useEffect } from "react";
 import { useLikes } from "@/app/contexts/totalLikes";
 
 export default function PhotographerStats({
-  photographer,
+  price,
   medias,
 }: {
-  photographer: Photographer;
+  price: number;
   medias: Media[];
 }) {
   const { totalLikes, setInitialLikes } = useLikes();
 
   useEffect(() => {
     const initialLikes = medias.reduce((sum, media) => sum + media.likes, 0);
-    console.log("Initial total likes:", initialLikes);
     setInitialLikes(initialLikes);
   }, [medias]);
 
   return (
-    <div className="fixed bg-secondary bottom-0 right-12 p-6 rounded-md">
-      <p className="text-lg flex items-center gap-12">
+    <div className="fixed bg-secondary w-94 bottom-0 right-12 p-6 rounded-md">
+      <p className="text-lg flex items-center justify-center gap-12">
         <span className="flex items-center gap-1">
           {totalLikes}
           <svg
@@ -41,7 +40,7 @@ export default function PhotographerStats({
             />
           </svg>
         </span>
-        <span>{photographer.price}€ / jour</span>
+        <span>{price}€ / jour</span>
       </p>
     </div>
   );

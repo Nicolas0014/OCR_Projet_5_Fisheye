@@ -57,16 +57,7 @@ export default function ModaleTrigger({
 
   return (
     <div>
-      <button
-        className="btn"
-        onClick={() => setIsModaleOpen(true)}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            setIsModaleOpen(true);
-          }
-        }}
-      >
+      <button className="btn" onClick={() => setIsModaleOpen(true)}>
         Contactez-moi
       </button>
 

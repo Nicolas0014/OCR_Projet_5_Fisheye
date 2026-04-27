@@ -42,8 +42,6 @@ export default async function PhotographerPage({
 
   const medias: Media[] = await getAllMediasForPhotographer(photographer.id);
 
-  // TODO: Calcul du total de likes et mettre a jour le contexte
-
   return (
     <LikesProvider>
       <main>
@@ -65,9 +63,7 @@ export default async function PhotographerPage({
           </Suspense>
         </div>
 
-        {/* TODO: Données fixes en bas de page */}
-        {/* Ne passer que tarif */}
-        <PhotographerStats photographer={photographer} medias={medias} />
+        <PhotographerStats price={photographer.price} medias={medias} />
       </main>
     </LikesProvider>
   );
