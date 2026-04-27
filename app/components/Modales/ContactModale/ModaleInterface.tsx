@@ -20,7 +20,7 @@ export default function ModaleInterface({
       ></div>
       <form
         onSubmit={onSubmit}
-        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-167.5 bg-secondary rounded-md p-8 space-y-4"
+        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-167.5 h-11/12 bg-secondary rounded-md p-8 space-y-4"
       >
         <svg
           width="42"

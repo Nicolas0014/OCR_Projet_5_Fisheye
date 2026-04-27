@@ -112,6 +112,7 @@ export default function ModaleInterface({
           />
         </svg>
 
+        {/* TODO : Bibliotheque lazy loading pour afficher un spinner tant qu'elle n'est pas chargée */}
         <figure className="relative w-262.5 h-full mx-auto flex flex-col">
           {currentMedia.image ? (
             <Image
@@ -119,7 +120,7 @@ export default function ModaleInterface({
               width={1050}
               height={950}
               alt={currentMedia.title}
-              className="w-full h-full rounded-md object-cover"
+              className="w-full h-9/10 rounded-md object-cover"
             />
           ) : currentMedia.video ? (
             <video className="w-full h-full rounded-md object-cover" controls>
@@ -127,7 +128,7 @@ export default function ModaleInterface({
               Votre navigateur ne supporte pas la lecture de vidéos.
             </video>
           ) : null}
-          <figcaption className="text-lg text-primary pt-6">
+          <figcaption className="text-lg text-primary pt-6 flex-1">
             {currentMedia.title}
           </figcaption>
         </figure>
