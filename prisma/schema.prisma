@@ -10,7 +10,7 @@ generator client {
 datasource db {
   provider = "sqlite"
   url      = env("DB_URL")
-  }
+}
 
 model Photographer {
 	id	Int	@id @default(autoincrement())

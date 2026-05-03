@@ -13,7 +13,19 @@ Puis initialisé prisma pour utiliser SQLite:
 `npx prisma init --datasource-provider sqlite`
 
 A ce stade vous devriez maintenant avoir un dossier `prisma` à la racine de votre projet.
-Ouvrez le fichier `schema.prisma` contenu à l’intérieur et remplacez `env(“DATABASE_URL”)` par `"file:dev.db"`
+Ouvrez le fichier `schema.prisma` contenu à l’intérieur et inscrivez `url = env("DB_URL")` dans `datasource db`.
+
+Dans un fichier `.env` à la racine de votre projet, ajoutez le lien vers votre db :
+
+`DB_URL = "file:dev.db"`.
+
+Également dans le fichier `prisma.config.ts`, rajoutez :
+
+```
+ datasource: {
+    url: env("DB_URL"),
+  },
+```
 
 Une fois cela réalisé, toujours dans le fichier schema.prisma, ajoutez à la fin du fichier le code suivant qui va définir les modèles de vos tables:
 

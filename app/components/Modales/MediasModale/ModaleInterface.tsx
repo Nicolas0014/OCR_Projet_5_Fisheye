@@ -22,11 +22,7 @@ export default function ModaleInterface({
     const el = modalRef.current;
     if (!el) return;
 
-    const focusables = Array.from(
-      el.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      ),
-    );
+    const focusables = Array.from(el.querySelectorAll<HTMLElement>("button"));
 
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
