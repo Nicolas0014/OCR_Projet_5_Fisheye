@@ -76,7 +76,7 @@ export default function ModaleInterface({
       ></div>
       <div
         className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-310 h-11/12 rounded-md p-8"
-        aria-label="image closeup view"
+        aria-label="Vue de la modale"
         ref={modalRef}
         role="dialog"
         aria-modal="true"
@@ -84,7 +84,7 @@ export default function ModaleInterface({
         <button
           className="absolute right-6 top-6 cursor-pointer"
           onClick={onClose}
-          aria-label="Close modale"
+          aria-label="Fermer la modale"
         >
           <svg
             width="42"
@@ -103,7 +103,7 @@ export default function ModaleInterface({
         <button
           className="absolute left-8 top-1/2 -translate-y-1/2 cursor-pointer"
           onClick={() => navigateTo("previous")}
-          aria-label="Previous image"
+          aria-label="Image précédente"
         >
           <svg
             width="30"
@@ -122,7 +122,7 @@ export default function ModaleInterface({
         <button
           className="absolute right-8 top-1/2 -translate-y-1/2 cursor-pointer"
           onClick={() => navigateTo("next")}
-          aria-label="Next image"
+          aria-label="Image suivante"
         >
           <svg
             width="30"

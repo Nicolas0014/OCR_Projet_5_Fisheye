@@ -56,7 +56,7 @@ export default function ModaleInterface({
         onClick={onClose}
       ></div>
       <div
-        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-167.5 h-11/12 bg-secondary rounded-md p-8"
+        className="relative left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-167.5 bg-secondary rounded-md p-8"
         ref={modalRef}
         role="dialog"
         aria-modal="true"
@@ -65,7 +65,7 @@ export default function ModaleInterface({
           <button
             className="absolute right-6 top-6 cursor-pointer"
             onClick={() => onClose()}
-            aria-label="close modale"
+            aria-label="Fermer la modale"
           >
             <svg
               width="42"
