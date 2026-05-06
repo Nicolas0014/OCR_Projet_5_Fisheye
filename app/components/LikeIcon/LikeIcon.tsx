@@ -25,9 +25,10 @@ export default function LikeIcon({ media }: { media: Media }) {
         setNumberOfLikes((prev) => prev + 1);
         setIsLiked(true);
         incrementLikes();
+        setError(null);
       } else {
-        throw new Error("Failed to update like");
         setError("Une erreur est survenue. Veuillez réessayer.");
+        throw new Error("Failed to update like");
       }
     } catch (error) {
       console.error("Error updating like:", error);
@@ -42,12 +43,13 @@ export default function LikeIcon({ media }: { media: Media }) {
       const response = await updateLike(media.id, true);
 
       if (!response.success) {
-        throw new Error("Failed to update like");
         setError("Une erreur est survenue. Veuillez réessayer.");
+        throw new Error("Failed to update like");
       } else {
         setNumberOfLikes((prev) => prev - 1);
         setIsLiked(false);
         decrementLikes();
+        setError(null);
       }
     } catch (error) {
       console.error("Error updating like:", error);
