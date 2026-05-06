@@ -31,6 +31,7 @@ export default function ModaleTrigger({
             setIsModaleOpen(true);
           }
         }}
+        aria-label="Ouvrir la modale"
       >
         {media.image ? (
           <Image

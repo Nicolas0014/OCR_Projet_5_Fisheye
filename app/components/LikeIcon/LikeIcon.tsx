@@ -13,6 +13,7 @@ export default function LikeIcon({ media }: { media: Media }) {
   const { incrementLikes, decrementLikes } = useLikes();
   const [numberOfLikes, setNumberOfLikes] = useState(media.likes);
   const [isLiked, setIsLiked] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleLike = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -26,9 +27,11 @@ export default function LikeIcon({ media }: { media: Media }) {
         incrementLikes();
       } else {
         throw new Error("Failed to update like");
+        setError("Une erreur est survenue. Veuillez réessayer.");
       }
     } catch (error) {
       console.error("Error updating like:", error);
+      setError("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
@@ -40,6 +43,7 @@ export default function LikeIcon({ media }: { media: Media }) {
 
       if (!response.success) {
         throw new Error("Failed to update like");
+        setError("Une erreur est survenue. Veuillez réessayer.");
       } else {
         setNumberOfLikes((prev) => prev - 1);
         setIsLiked(false);
@@ -47,6 +51,7 @@ export default function LikeIcon({ media }: { media: Media }) {
       }
     } catch (error) {
       console.error("Error updating like:", error);
+      setError("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
@@ -64,7 +69,6 @@ export default function LikeIcon({ media }: { media: Media }) {
           viewBox="0 0 18 19"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          aria-label="likes"
         >
           <path
             d="M8.75 18.35L7.48125 17.03C2.975 12.36 0 9.28 0 5.5C0 2.42 2.1175 0 4.8125 0C6.335 0 7.79625 0.81 8.75 2.09C9.70375 0.81 11.165 0 12.6875 0C15.3825 0 17.5 2.42 17.5 5.5C17.5 9.28 14.525 12.36 10.0188 17.04L8.75 18.35Z"
@@ -72,6 +76,7 @@ export default function LikeIcon({ media }: { media: Media }) {
           />
         </svg>
       </button>
+      {error && <span className="text-red-500">{error}</span>}
     </p>
   );
 }
