@@ -13,6 +13,7 @@ export default function LikeIcon({ media }: { media: Media }) {
   const { incrementLikes, decrementLikes } = useLikes();
   const [numberOfLikes, setNumberOfLikes] = useState(media.likes);
   const [isLiked, setIsLiked] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleLike = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -26,9 +27,11 @@ export default function LikeIcon({ media }: { media: Media }) {
         incrementLikes();
       } else {
         throw new Error("Failed to update like");
+        setError("Une erreur est survenue. Veuillez réessayer.");
       }
     } catch (error) {
       console.error("Error updating like:", error);
+      setError("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
@@ -40,6 +43,7 @@ export default function LikeIcon({ media }: { media: Media }) {
 
       if (!response.success) {
         throw new Error("Failed to update like");
+        setError("Une erreur est survenue. Veuillez réessayer.");
       } else {
         setNumberOfLikes((prev) => prev - 1);
         setIsLiked(false);
@@ -47,6 +51,7 @@ export default function LikeIcon({ media }: { media: Media }) {
       }
     } catch (error) {
       console.error("Error updating like:", error);
+      setError("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
@@ -71,6 +76,7 @@ export default function LikeIcon({ media }: { media: Media }) {
           />
         </svg>
       </button>
+      {error && <span className="text-red-500">{error}</span>}
     </p>
   );
 }

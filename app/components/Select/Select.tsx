@@ -29,16 +29,15 @@ export default function Select({
       <label className="font-bold py-4" htmlFor="orderBy">
         Trier par
       </label>
-      <div
+      <button
         id="orderBy"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls="orderBy-list"
         className={`relative bg-primary text-white font-bold rounded-md py-1 px-4 cursor-pointer min-w-40 z-10`}
         onClick={() => setIsOpen(!isOpen)}
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            setIsOpen(!isOpen);
-          }
-        }}
+        aria-label="Ouvrir la liste des filtres disponibles"
       >
         <div className="flex items-center gap-4">
           <span className="py-3 px-1">{filterSelected}</span>
@@ -51,14 +50,21 @@ export default function Select({
           />
         </div>
         {isOpen && (
-          <div className="absolute left-0 pb-1 px-4 bg-primary w-full flex flex-col rounded-b-md">
+          <div
+            className="absolute left-0 pb-1 px-4 bg-primary w-full flex flex-col rounded-b-md"
+            role="listbox"
+            id="orderBy-list"
+          >
             {items
               .filter((item) => item !== filterSelected)
               .map((item) => (
                 <div
                   key={item}
+                  role="option"
+                  aria-selected={item === filterSelected}
                   onClick={() => handleChange(item as SelectItems)}
                   tabIndex={0}
+                  aria-label={`Trier par ${item}`}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       handleChange(item as SelectItems);
@@ -71,7 +77,7 @@ export default function Select({
               ))}
           </div>
         )}
-      </div>
+      </button>
     </div>
   );
 }

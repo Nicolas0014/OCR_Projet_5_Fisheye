@@ -48,7 +48,7 @@ export default async function PhotographerPage({
         <Header showTitle={false} />
 
         <div className="space-y-8">
-          {/* Header du photographe */}
+          {/* Bandeau du photographe */}
           <Suspense
             fallback={
               <div>Chargement des informations du photographe en cours...</div>

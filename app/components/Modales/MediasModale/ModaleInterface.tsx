@@ -32,14 +32,14 @@ export default function ModaleInterface({
 
       if (focusables.length === 0) return;
 
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last?.focus();
-      }
-
       if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault();
         first?.focus();
+      }
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
       }
     };
 

@@ -22,6 +22,7 @@ export const updateNumberOfLikes = (mediaId, newNumberOfLikes) =>
     data: { likes: newNumberOfLikes },
   });
 
+// Fonction sécurisée
 export const secureUpdateNumberOfLikes = (mediaId, unlike = false) =>
   prisma.media.update({
     where: { id: mediaId },

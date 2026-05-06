@@ -52,7 +52,10 @@ export default function ModaleTrigger({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Formulaire envoyé !");
+    console.log("firstName:", firstName);
+    console.log("lastName:", lastName);
+    console.log("email:", email);
+    console.log("message:", message);
   };
 
   return (
